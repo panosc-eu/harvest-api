@@ -1,0 +1,25 @@
+{
+  "name": "fair-data-api",
+  "version": "1.0.0",
+  "description": "WP3  API  that will allow for FAIR exposure of the data at the individual institutions through a catalogue service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panosc-eu/fair-data-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-v3.0",
+  "bugs": {
+    "url": "https://github.com/panosc-eu/fair-data-api/issues"
+  },
+  "homepage": "https://github.com/panosc-eu/fair-data-api#readme",
+  "dependencies": {
+    "oai-pmh": "^2.0.2",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333"
+  }
+}
