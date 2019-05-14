@@ -19,6 +19,17 @@ The National Library of Finland.
 Supports `Identify`, `ListMetadataFormats`, `GetRecord`, `ListIdentifiers` and `ListRecords`. The optional
 `from` and `until` arguments are supported for selective harvesting with `YYYY-MM-DDThh:mm:ssZ` granularity.  `ListSets` is not supported.  
 
+## Runtime configuration
+
+Environment variables are loaded from a `.env` file into `process.env` using the module [dotenv](https://www.npmjs.com/package/dotenv).  
+Create one `.env` file inside the root of the project and another one inside the directory `production`.  
+A default `.env` file should contain
+
+```
+LOG_LEVEL=info
+DB_HOSTNAME=localhost
+```
+
 ## Install It
 ```
 npm install
