@@ -2,8 +2,9 @@
   "name": "fair-data-api",
   "version": "1.0.0",
   "description": "WP3  API  that will allow for FAIR exposure of the data at the individual institutions through a catalogue service",
-  "main": "index.js",
+  "main": "harvestOAI.js",
   "scripts": {
+    "dev": "tsc && node harvestOAI.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

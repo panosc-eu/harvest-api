@@ -2,7 +2,7 @@ FROM node:8.9.4
 
 # This Dockerfile assumes that you have built production code using npm run compile
 
-EXPOSE 3005
+EXPOSE 3000
 WORKDIR /
 
 COPY package.json /

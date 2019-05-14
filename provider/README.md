@@ -55,6 +55,13 @@ At the simplest level:
 npm run compile
 npm start
 ```
+## Run in *production* mode:
+
+```
+npm run compile
+docker-compose build
+docker-compose up
+```
 
 The gulp tasks compile Typescript and copy files to `dist`. 
 
