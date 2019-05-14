@@ -8,7 +8,7 @@ OAI-PMH Service borrows from the [Modular OAI-PMH Server](https://github.com/Nat
 The National Library of Finland. 
  
 
-## Dependenices
+## Dependencies
 
 * Node 8.9.4+
 * Typescript 2.7.2+
@@ -55,7 +55,7 @@ At the simplest level:
 npm run compile
 npm start
 ```
-## Run in *production* mode:
+## Dockerize:
 
 ```
 npm run compile
