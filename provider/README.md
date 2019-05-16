@@ -8,7 +8,7 @@ OAI-PMH Service borrows from the [Modular OAI-PMH Server](https://github.com/Nat
 The National Library of Finland. 
  
 
-## Dependenices
+## Dependencies
 
 * Node 8.9.4+
 * Typescript 2.7.2+
@@ -18,6 +18,17 @@ The National Library of Finland.
 
 Supports `Identify`, `ListMetadataFormats`, `GetRecord`, `ListIdentifiers` and `ListRecords`. The optional
 `from` and `until` arguments are supported for selective harvesting with `YYYY-MM-DDThh:mm:ssZ` granularity.  `ListSets` is not supported.  
+
+## Runtime configuration
+
+Environment variables are loaded from a `.env` file into `process.env` using the module [dotenv](https://www.npmjs.com/package/dotenv).  
+Create one `.env` file inside the root of the project and another one inside the directory `production`.  
+A default `.env` file should contain
+
+```
+LOG_LEVEL=info
+DB_HOSTNAME=localhost
+```
 
 ## Install It
 ```
@@ -54,6 +65,13 @@ At the simplest level:
 ```
 npm run compile
 npm start
+```
+## Dockerize:
+
+```
+npm run compile
+docker-compose build
+docker-compose up
 ```
 
 The gulp tasks compile Typescript and copy files to `dist`. 

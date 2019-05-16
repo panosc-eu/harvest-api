@@ -40,7 +40,7 @@ gulp.task("build", function () {
 
 gulp.task("copy", function() {
     return gulp.src([".env"])
-        .pipe(gulp.dest("dist"));
+        .pipe(gulp.dest("dist/server"));
 });
 
 gulp.task("copy-production", function() {

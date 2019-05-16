@@ -122,7 +122,7 @@ export let publication = (req: Request, res: Response) => {
 
     //res.set('Content-Type', 'text/xml');
     let db = null;
-    MongoClient.connect("mongodb://localhost:27017", (err, client) => {
+    MongoClient.connect("mongodb://" + process.env.DB_HOSTNAME + ":27017", (err, client) => {
         if (err) return logger.console.error(err);
         db = client.db("aoi-publications");
         db.collection("Publication").save(req.body, (err, result) => {

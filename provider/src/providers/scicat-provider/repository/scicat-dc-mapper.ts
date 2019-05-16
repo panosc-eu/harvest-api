@@ -101,14 +101,14 @@ export class ScicatDcMapper implements ProviderDCMapper {
         };
 
         for (let record of records) {
-            const updatedAt: string = this.setTimeZoneOffset(record);
+            //const updatedAt: string = this.setTimeZoneOffset(record);
             let item =
                 {
                     record: [
                         {
                             'header': [
-                                {'identifier': record.id.toString()},
-                                {'datestamp': updatedAt}
+                                {'identifier': record._id.toString()},
+                                {'datestamp': "updatedAt"}
                             ]
                         }
                     ]
