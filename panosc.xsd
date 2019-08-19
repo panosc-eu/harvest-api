@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:panosc="https://github.com/panosc-eu/fair-data-api/blob/master/panosc.xsd">
 
-<xs:complexType name="measurementtype">
-  <xs:sequence>
-    <xs:element name="value" type="xs:float"/>
-    <xs:element name="units" type="xs:string"/>
-  </xs:sequence>
-</xs:complexType>
+    <xs:annotation>
+        <xs:documentation>
+        Schema for panosc
+    </xs:documentation>
+    </xs:annotation>
 
-    <xs:element name="panosc">
-        <xs:complexType>
+    <xs:complexType name="measurementtype">
+        <xs:sequence>
+            <xs:element name="value" type="xs:float" />
+            <xs:element name="units" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+<xs:element name="panosc" type="panosc:panosctype"></xs:element>
+        <xs:complexType name="panosctype">
             <xs:sequence>
                 <xs:element name="id" minOccurs="1" maxOccurs="1" type="xs:string" />
                 <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -27,6 +32,5 @@
                 <xs:element name="wavelength" minOccurs="0" maxOccurs="1" type="measurementtype" />
             </xs:sequence>
         </xs:complexType>
-    </xs:element>
 
 </xs:schema>
