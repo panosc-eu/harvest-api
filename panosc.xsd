@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:panosc="https://github.com/panosc-eu/fair-data-api/blob/master/panosc.xsd">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:panosc="https://raw.githubusercontent.com/panosc-eu/fair-data-api/master/panosc.xsd">
 
     <xs:annotation>
         <xs:documentation>
