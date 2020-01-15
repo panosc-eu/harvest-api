@@ -46,6 +46,12 @@ import { DataRepository, ERRORS, METADATA_FORMAT_DC } from "../../core/core-oai-
 import logger from "../../../server/logger";
 import {MongoConnector} from "../dao/mongo-dao";
 
+
+export enum SETS {
+    setspec = "openaire_data",
+    setname = "openaire_data"
+  }
+
 /**
  * Factory function to create the oai provider
  * @param {Object} [options={}] - Implementation-specific configuration
@@ -61,7 +67,7 @@ export function factory(options = {}): DataRepository {
         /**
          * Defines whether this repository supports sets.
          */
-        setSupport: false,
+        setSupport: true,
 
         /**
          * Defines whether this repository supports resumption tokens.
@@ -92,8 +98,8 @@ export function factory(options = {}): DataRepository {
          * @param {string} resumptionToken
          * @returns {Promise<never>}
          */
-        getSets: (resumptionToken: string = undefined) => {
-            return Promise.reject(resumptionToken ? ERRORS.badResumptionToken : ERRORS.noSetHierarchy);
+        getSets: (identifier: string = undefined) => {
+            return Promise.resolve([SETS ]);
         },
 
         /**

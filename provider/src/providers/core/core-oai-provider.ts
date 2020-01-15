@@ -72,6 +72,9 @@ export enum METADATA_FORMAT_DC {
     namespace = 'http://www.openarchives.org/OAI/2.0/oai_dc/'
 }
 
+
+
+
 /**
  * Interface for the class that maps between DAO data and
  * formatted OAI xml.
@@ -82,6 +85,8 @@ export interface ProviderDCMapper {
     mapOaiDcGetRecord(records: any): any;
 
     mapOaiDcListIdentifiers(records: any[]): any;
+
+    mapOaiDcListSets(records: any[]): any;
 
 }
 
@@ -470,7 +475,8 @@ export class CoreOaiProvider {
                     !this.hasKey(query, 'resumptionToken'))) {
                 resolve(generateException(exception, EXCEPTION_CODES.BAD_ARGUMENT));
             } else {
-                resolve(generateException(exception, EXCEPTION_CODES.NO_SET_HIERARCHY));
+                const mapped = this.mapper.mapOaiDcListSets(); 
+                resolve(generateResponse(<any>query, this.parameters.baseURL, mapped));
             }
         });
     }
