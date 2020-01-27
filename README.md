@@ -35,6 +35,12 @@ DB_HOSTNAME=localhost
 npm install
 ```
 
+## Setup mongodb
+
+For mongodb, you need a mongodb instance running in the background.
+It can serve on localhost at port 27017.
+It should provide database with a collection as defined in the mongo-dao.ts connector.
+
 ## Run It
 #### Run in *development* mode:
 
