@@ -52,11 +52,6 @@ The Express server will start on default port 3000.
 * [`http://localhost:3000/scicat/oai?verb=ListIdentifiers&metadataPrefix=oai_dc`](http://localhost:3000/scicat/oai?verb=ListIdentifiers&metadataPrefix=oai_dc)
 * [`http://localhost:3000/scicat/oai?verb=ListRecords&metadataPrefix=oai_dc`](http://localhost:3000/scicat/oai?verb=ListRecords&metadataPrefix=oai_dc)
 
-### PUT Records:
-
-Add new records to your mongodb instance by HTTP PUT using the folling route:
-
-* [`http://localhost:3000/scicat/Publication`](http://localhost:3000/scicat/Publication)
 
 
 ## Run in *production* mode:
