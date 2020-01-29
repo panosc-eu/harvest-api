@@ -1,5 +1,4 @@
 import logger from "../../../server/logger";
-import { getCredentials, hasCredentialsFile } from "../../core/credentials";
 import { reject } from "bluebird";
 import { MongoClient, ObjectId } from "mongodb";
 
@@ -10,7 +9,7 @@ import { MongoClient, ObjectId } from "mongodb";
  */
 export class MongoConnector {
   public static instance: MongoConnector;
-  public db: null;
+  public db = null;
 
   private constructor() {
     logger.debug("Setting up the mongo connection.");
@@ -21,14 +20,14 @@ export class MongoConnector {
     /*if (hasCredentialsFile(credFile)) {
       const creds = getCredentials(credFile);
     }*/
-    const url = "mongodb://" + process.env.DB_HOSTNAME + ":27017";console.log(url);
+    const url = `mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}`;
 
-    MongoClient.connect("mongodb://" + process.env.DB_HOSTNAME + ":27017", (err, client) => {
+    MongoClient.connect(url, (err, client) => {
       if (err) {
         logger.error("failed to connect", err);
         this.db = null;
       }
-      this.db = client.db("aoi-publications");
+      this.db = client.db(process.env.DB_DATABASE_NAME);
     });
   }
 
@@ -50,19 +49,21 @@ export class MongoConnector {
    * @returns {Promise<any>}
    */
   public recordsQuery(parameters: any): Promise<any> {
-    if (!this.db) {
+    if (this.db) {
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
+      return new Promise((resolve: any, reject: any) => {
+        collection.find().toArray(function(err, items) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(items);
+          }
+        });
+      });
+
+    } else {
       reject("no db connection");
     }
-    let Publication = this.db.collection("Publication");
-    return new Promise((resolve: any, reject: any) => {
-      Publication.find().toArray(function(err, items) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(items);
-        }
-      });
-    });
   }
 
   /**
@@ -71,20 +72,22 @@ export class MongoConnector {
    * @returns {Promise<any>}
    */
   public identifiersQuery(parameters: any): Promise<any> {
-    if (!this.db) {
+    if (this.db) {
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
+      return new Promise((resolve: any, reject: any) => {
+        // need to add relevant date to projection
+        collection.find({},{_id: 1 }).toArray(function(err, items) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(items);
+          }
+        });
+      });
+    
+    } else {
       reject("no db connection");
     }
-    let Publication = this.db.collection("Publication");
-    return new Promise((resolve: any, reject: any) => {
-      // need to add relevant date to projection
-      Publication.find({},{_id: 1 }).toArray(function(err, items) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(items);
-        }
-      });
-    });
   }
 
   /**
@@ -93,38 +96,42 @@ export class MongoConnector {
    * @returns {Promise<any>}
    */
   public getRecord(parameters: any): Promise<any> {
-    if (!this.db) {
-      reject("no db connection");
-    }
-    let Publication = this.db.collection("Publication");
-    return new Promise((resolve: any, reject: any) => {
-      const query = {
-        _id: ObjectId(parameters.identifier)
-      };
-      Publication.findOne(query, {}, function(err, item) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(item);
-        }
-      });
-    });
-  }
-
-  private aggregatePublicationQuery(pipeline: any): Promise<any> {
-    if (!this.db) {
-      reject("no db connection");
-    }
-    var collection = this.db.collection("Publication");
-    var resolve = null;
-    return new Promise((resolve: any, err: any) => {
-      var resolve = collection.aggregate(pipeline, function(err, cursor) {
-        cursor.toArray(function(err, resolve) {
+    if (this.db) {
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
+      return new Promise((resolve: any, reject: any) => {
+        const query = {
+          _id: ObjectId(parameters.identifier)
+        };
+        collection.findOne(query, {}, function(err, item) {
           if (err) {
-            logger.error("recordsQuery error:", err);
+            reject(err);
+          } else {
+            resolve(item);
           }
         });
       });
-    });
+
+    } else {
+      reject("no db connection");
+    }
+  }
+
+  private aggregatePublicationQuery(pipeline: any): Promise<any> {
+    if (this.db) {
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
+      var resolve = null;
+      return new Promise((resolve: any, err: any) => {
+        var resolve = collection.aggregate(pipeline, function(err, cursor) {
+          cursor.toArray(function(err, resolve) {
+            if (err) {
+              logger.error("recordsQuery error:", err);
+            }
+          });
+        });
+      });
+
+    } else {
+      reject("no db connection");
+    }
   }
 }

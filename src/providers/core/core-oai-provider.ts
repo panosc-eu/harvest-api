@@ -475,7 +475,7 @@ export class CoreOaiProvider {
                     !this.hasKey(query, 'resumptionToken'))) {
                 resolve(generateException(exception, EXCEPTION_CODES.BAD_ARGUMENT));
             } else {
-                const mapped = this.mapper.mapOaiDcListSets(); 
+                const mapped = this.mapper.mapOaiDcListSets([]); 
                 resolve(generateResponse(<any>query, this.parameters.baseURL, mapped));
             }
         });

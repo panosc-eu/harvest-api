@@ -29,7 +29,7 @@ export class ScicatDcMapper implements ProviderDCMapper {
       record: [
         {
           header: [
-            { identifier: record._id.toString() },
+            { identifier: record.pid },
             { datestamp: "updatedAt" }
           ]
         },
@@ -105,7 +105,7 @@ export class ScicatDcMapper implements ProviderDCMapper {
         record: [
           {
             header: [
-              { identifier: record._id.toString() },
+              { identifier: record.pid },
               { datestamp: "updatedAt" }
             ]
           }
