@@ -78,17 +78,17 @@ export class OpenaireMapper implements ProviderDCMapper {
                     { _attr: { identifierType: "URL" } },
                     `https://doi.org/${record.pid}`
                   ]
-                },
-                {
-                  "datacite:descriptions": [
-                    {
-                      description: [
-                        { _attr: { descriptionType: "Abstract" } },
-                        record.dataDescription
-                      ]
-                    }
-                  ]
-                },
+                }, record.dataDescription ? 
+                  {
+                    "datacite:descriptions": [
+                      {
+                        description: [
+                          { _attr: { descriptionType: "Abstract" } },
+                          record.dataDescription
+                        ]
+                      }
+                    ]
+                  } : { /* ignore abstract if it doesn't exist */ },
                 {
                   "datacite:dates": [
                     {
@@ -96,13 +96,13 @@ export class OpenaireMapper implements ProviderDCMapper {
                         { _attr: { dateType: "Issued" } },
                         formatDate(record.creationTime)
                       ]
-                    },
-                    {
-                      "datacite:date": [
-                        { _attr: { dateType: "Available" } },
-                        formatDate(record.creationTime)
-                      ]
-                    }
+                    }, record.availableTime ? 
+                      {
+                        "datacite:date": [
+                          { _attr: { dateType: "Available" } },
+                          formatDate(record.availableTime)
+                        ]
+                      } : { /* ignore available time if it doesn't exist */ }
                   ]
                 },
                 { "datacite:publicationYear": record.publicationYear },
