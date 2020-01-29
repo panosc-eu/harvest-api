@@ -30,14 +30,16 @@ import {ProviderConfiguration} from "../../core/oai-service";
  */
 export class Configuration implements ProviderConfiguration {
 
-    public repositoryName: string = "Scicat Provider";
-    public baseURL: string =  "http://localhost:3000/scicat/oai";
-    public protocolVersion: string = '2.0';
-    public adminEmail: string = "gareth.murphy@esss.se";
-    public port: number = 3000;
-    public description: string = "";
-    public deletedRecord: string = DELETED_RECORDS_SUPPORT.NO;
-    public granularity: string = HARVESTING_GRANULARITY.DATETIME;
-    public earliestDatestamp: string = '2017-01-00T03:24:00';
+  public repositoryName: string = "Scicat Provider";
+  public baseURL: string = `http://localhost:3000${this.basePath}`;
+  public protocolVersion: string = '2.0';
+  public adminEmail: string = process.env.ADMIN_USER_EMAIL;
+  public port: number = 3000;
+  public description: string = "";
+  public deletedRecord: string = DELETED_RECORDS_SUPPORT.NO;
+  public granularity: string = HARVESTING_GRANULARITY.DATETIME;
+  public earliestDatestamp: string = '2017-01-00T03:24:00';
 
+  constructor(private basePath: string) {
+  }
 }

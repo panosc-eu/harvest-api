@@ -28,6 +28,10 @@ A default `.env` file should contain
 ```
 LOG_LEVEL=info
 DB_HOSTNAME=localhost
+DB_PORT=27017
+DB_COLLECTION_NAME=Publication
+DB_DATABASE_NAME=oai-publications
+ADMIN_USER_EMAIL=name@somewhere.com
 ```
 
 ## Install It

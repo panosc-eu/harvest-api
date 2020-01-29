@@ -48,8 +48,8 @@ import {MongoConnector} from "../dao/mongo-dao";
 
 
 export enum SETS {
-    setspec = "openaire_data",
-    setname = "openaire_data"
+  setspec = "openaire_data",
+  setname = "openaire_data"
   }
 
 /**
@@ -59,69 +59,69 @@ export enum SETS {
  */
 export function factory(options = {}): DataRepository {
 
-    const dao: MongoConnector = MongoConnector.getInstance();
+  const dao: MongoConnector = MongoConnector.getInstance();
 
-    
-    return Object.freeze({
+  
+  return Object.freeze({
 
-        /**
-         * Defines whether this repository supports sets.
-         */
-        setSupport: true,
+    /**
+     * Defines whether this repository supports sets.
+     */
+    setSupport: true,
 
-        /**
-         * Defines whether this repository supports resumption tokens.
-         */
-        resumptionSupport: false,
+    /**
+     * Defines whether this repository supports resumption tokens.
+     */
+    resumptionSupport: false,
 
-        /**
-         * Get individual record.
-         * @param parameters (identifier, metadataPrefix)
-         * @returns {Promise<any>} Resolves with a {@link record}
-         */
-        getRecord: (parameters: any) => {
-            return dao.getRecord(parameters);
-        },
+    /**
+     * Get individual record.
+     * @param parameters (identifier, metadataPrefix)
+     * @returns {Promise<any>} Resolves with a {@link record}
+     */
+    getRecord: (parameters: any) => {
+      return dao.getRecord(parameters);
+    },
 
-        /**
-         * Returns the metadata formats supported by this repository (DC only)
-         * @param {string} identifier (not used)
-         * @returns {Promise<METADATA_FORMAT_DC[]>}
-         */
-        getMetadataFormats: (identifier: string = undefined) => {
-            // Since only DC is supported, safe to ignore the identifier param.
-            return Promise.resolve([METADATA_FORMAT_DC]);
-        },
+    /**
+     * Returns the metadata formats supported by this repository (DC only)
+     * @param {string} identifier (not used)
+     * @returns {Promise<METADATA_FORMAT_DC[]>}
+     */
+    getMetadataFormats: (identifier: string = undefined) => {
+      // Since only DC is supported, safe to ignore the identifier param.
+      return Promise.resolve([METADATA_FORMAT_DC]);
+    },
 
-        /**
-         * Used to retrieve the set structure of a repository. Not supported currently.
-         * @param {string} resumptionToken
-         * @returns {Promise<never>}
-         */
-        getSets: (identifier: string = undefined) => {
-            return Promise.resolve([SETS ]);
-        },
+    /**
+     * Used to retrieve the set structure of a repository. Not supported currently.
+     * @param {string} resumptionToken
+     * @returns {Promise<never>}
+     */
+    getSets: (identifier: string = undefined) => {
+      return Promise.resolve([SETS ]);
+    },
 
-        /**
-         * Gets list of identifiers.
-         * @param parameters (metadataPrefix, from (optional), until (optional), set (not supported),
-         *        resumptionToken (not supported))
-         * @returns {Promise<any>} an array of {@link record}
-         */
-        getIdentifiers: (parameters: any) => {
-            return dao.identifiersQuery(parameters);
-        },
+    /**
+     * Gets list of identifiers.
+     * @param parameters (metadataPrefix, from (optional), until (optional), set (not supported),
+     *    resumptionToken (not supported))
+     * @returns {Promise<any>} an array of {@link record}
+     */
+    getIdentifiers: (parameters: any) => {
+      return dao.identifiersQuery(parameters);
+    },
 
-        /**
-         * Gets list of records
-         * @param parameters (metadataPrefix, from (optional), until (optional), set (not supported),
-         *        resumptionToken (not supported))
-         * @returns {Promise<any>} an array of {@link record}
-         */
-        getRecords: (parameters: any) => {
-            return dao.recordsQuery(parameters);
+    /**
+     * Gets list of records
+     * @param parameters (metadataPrefix, from (optional), until (optional), set (not supported),
+     *    resumptionToken (not supported))
+     * @returns {Promise<any>} an array of {@link record}
+     */
+    getRecords: (parameters: any) => {
+      return dao.recordsQuery(parameters);
 
-        }
+    }
 
-    });
+  });
 }
