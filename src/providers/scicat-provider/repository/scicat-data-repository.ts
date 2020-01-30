@@ -51,7 +51,7 @@ import { MongoConnector } from "../dao/mongo-dao";
 
 export enum METADATA_FORMAT_PANOSC {
   prefix = "panosc",
-  schema = "https://github.com/panosc-eu/fair-data-api/blob/master/panosc.xsd",
+  schema = "https://github.com/panosc-eu/harvest-api/blob/master/panosc.xsd",
   namespace = "http://scicat.esss.se/panosc"
 }
 
