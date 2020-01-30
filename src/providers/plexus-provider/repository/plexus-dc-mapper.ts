@@ -1,7 +1,7 @@
 import logger from "../../../server/logger";
 import { ProviderDCMapper } from "../../core/core-oai-provider";
 
-export class ScicatDcMapper implements ProviderDCMapper {
+export class PlexusDcMapper implements ProviderDCMapper {
   /**
    * The Universal Coordinated Time (UTC) date needs to be modifed
    * to match the local timezone.
