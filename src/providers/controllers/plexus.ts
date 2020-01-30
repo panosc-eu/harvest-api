@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { CoreOaiProvider } from "../core/core-oai-provider";
 import logger from "../../server/logger";
-import { factory } from "../scicat-provider/repository/scicat-data-repository";
-import { Configuration } from "../scicat-provider/repository/configuration";
-import { ScicatDcMapper } from "../scicat-provider/repository/scicat-dc-mapper";
+import { factory } from "../plexus-provider/repository/plexus-data-repository";
+import { Configuration } from "../plexus-provider/repository/configuration";
+import { PlexusDcMapper } from "../plexus-provider/repository/plexus-dc-mapper";
 import { oaiRequestHandler } from "./oai-request-handler";
 const MongoClient = require("mongodb").MongoClient;
 
@@ -13,7 +13,7 @@ const MongoClient = require("mongodb").MongoClient;
  * @type {CoreOaiProvider}
  */
 export const oai = (basePath: string) => {
-  return oaiRequestHandler(new CoreOaiProvider(factory, new Configuration(basePath), new ScicatDcMapper()));
+  return oaiRequestHandler(new CoreOaiProvider(factory, new Configuration(basePath), new PlexusDcMapper()));
 }
 
 export let publication = (req: Request, res: Response) => {

@@ -2,10 +2,10 @@
  *  Copyright 2018 Willamette University
  *
  *  This file is part of OAI-PHM Service.
- *  
+ *
  *  @author Michael Spalti
  *
- *  OAI-PHM Service is based on the Modular OAI-PMH Server, University of Helsinki, 
+ *  OAI-PHM Service is based on the Modular OAI-PMH Server, University of Helsinki,
  *  The National Library of Finland.
  *
  *  OAI-PHM Service is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
  *  (at your option) any later version.
  *
  *  OAI-PHM Service is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
@@ -41,16 +41,30 @@
  * @property {string} searchUrl
  */
 
-
-import { DataRepository, ERRORS, METADATA_FORMAT_DC } from "../../core/core-oai-provider";
+import {
+  DataRepository,
+  ERRORS,
+  METADATA_FORMAT_DC
+} from "../../core/core-oai-provider";
 import logger from "../../../server/logger";
-import {MongoConnector} from "../dao/mongo-dao";
+import { MongoConnector } from "../dao/mongo-dao";
 
+export enum METADATA_FORMAT_PANOSC {
+  prefix = "panosc",
+  schema = "https://github.com/panosc-eu/harvest-api/blob/master/panosc.xsd",
+  namespace = "http://scicat.esss.se/panosc"
+}
+
+export enum METADATA_FORMAT_OAI_DATACITE {
+  prefix = "oai_datacite",
+  schema = "http://schema.datacite.org/meta/kernel-3/metadata.xsd",
+  namespace = "http://datacite.org/schema/kernel-3"
+}
 
 export enum SETS {
   setspec = "openaire_data",
   setname = "openaire_data"
-  }
+}
 
 /**
  * Factory function to create the oai provider
@@ -58,12 +72,9 @@ export enum SETS {
  * @returns {DataRepository}
  */
 export function factory(options = {}): DataRepository {
-
   const dao: MongoConnector = MongoConnector.getInstance();
 
-  
   return Object.freeze({
-
     /**
      * Defines whether this repository supports sets.
      */
@@ -90,7 +101,11 @@ export function factory(options = {}): DataRepository {
      */
     getMetadataFormats: (identifier: string = undefined) => {
       // Since only DC is supported, safe to ignore the identifier param.
-      return Promise.resolve([METADATA_FORMAT_DC]);
+      return Promise.resolve([
+        METADATA_FORMAT_DC,
+        METADATA_FORMAT_PANOSC,
+        METADATA_FORMAT_OAI_DATACITE
+      ]);
     },
 
     /**
@@ -99,7 +114,7 @@ export function factory(options = {}): DataRepository {
      * @returns {Promise<never>}
      */
     getSets: (identifier: string = undefined) => {
-      return Promise.resolve([SETS ]);
+      return Promise.resolve([SETS]);
     },
 
     /**
@@ -120,8 +135,6 @@ export function factory(options = {}): DataRepository {
      */
     getRecords: (parameters: any) => {
       return dao.recordsQuery(parameters);
-
     }
-
   });
 }

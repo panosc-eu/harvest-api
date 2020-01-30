@@ -1,7 +1,7 @@
 import {CoreOaiProvider} from "../core/core-oai-provider";
-import {factory} from "../scicat-provider/repository/scicat-data-repository";
-import {Configuration} from "../scicat-provider/repository/configuration";
-import { OpenaireMapper } from "../scicat-provider/repository/openaire-mapper";
+import {factory} from "../plexus-provider/repository/plexus-data-repository";
+import {Configuration} from "../plexus-provider/repository/configuration";
+import { OpenaireMapper } from "../plexus-provider/repository/openaire-mapper";
 import { oaiRequestHandler } from "./oai-request-handler";
 
 /**
