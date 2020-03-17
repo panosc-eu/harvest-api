@@ -4,7 +4,7 @@ WORKDIR /usr/src/app/
 COPY package.json /usr/src/app/
 COPY . /usr/src/app/
 RUN npm install
-COPY CI/ESS/configuration.ts /usr/src/app/src/providers/scicat-provider/repository/configuration.ts
+COPY CI/ESS/.env /usr/src/app/.env
 RUN npm run compile
 ENV NODE_ENV=production
 RUN npm prune
