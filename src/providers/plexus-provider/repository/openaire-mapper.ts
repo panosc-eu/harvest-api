@@ -71,7 +71,7 @@ export class OpenaireMapper implements ProviderDCMapper {
                 },
                 // ......does it matter what these fields are called?
                 {
-                  "datacite:titles": [{ title: record.title }]
+                  "datacite:titles": [{ "datacite:title": record.title }]
                 },
                 {
                   "datacite:identifier": [
