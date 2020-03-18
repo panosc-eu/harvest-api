@@ -1,5 +1,6 @@
 import logger from "../../../server/logger";
 import { ProviderDCMapper } from "../../core/core-oai-provider";
+const humanname = require("humanname");
 
 export class OpenaireMapper implements ProviderDCMapper {
   /**
@@ -119,18 +120,23 @@ export class OpenaireMapper implements ProviderDCMapper {
                 },
                 {
                   "datacite:creators": record.creator.map(
-                    (creator: string, index: number) => ({
-                      creator: [
+                    (creator: string, index: number) => {
+                      const parsed = humanname.parse(creator);
+                      const reverse = parsed.lastName+", "+parsed.firstName;
+                      return (
                         {
-                          creatorName: creator
-                        },
-                        {
-                          affiliation: record.affiliations
-                            ? record.affiliations[index]
-                            : record.affiliation
-                        }
-                      ]
-                    })
+                          creator: [
+                            {
+                              creatorName: reverse
+                            },
+                            {
+                              affiliation: record.affiliations
+                                ? record.affiliations[index]
+                                : record.affiliation
+                            }
+                          ]
+                        })
+                    }
                   )
                 },
                 { "datacite:publisher": record.publisher }, //category?/ source?
