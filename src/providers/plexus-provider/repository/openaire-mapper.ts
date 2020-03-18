@@ -31,23 +31,20 @@ export class OpenaireMapper implements ProviderDCMapper {
       let mm = date.getMonth() + 1;
       const yyyy = date.getFullYear();
       if (dd < 10) {
-        dd = '0' + dd;
-      } 
+        dd = "0" + dd;
+      }
       if (mm < 10) {
-        mm = '0' + mm;
-      } 
+        mm = "0" + mm;
+      }
       return `${yyyy}-${mm}-${dd}`;
-    }
+    };
 
     let item = {
       record: [
         {
           header: [
             {
-              identifier: [
-                { _attr: { identifierType: "doi" } },
-                record.pid
-              ]
+              identifier: [{ _attr: { identifierType: "doi" } }, record.pid]
             },
             { setSpec: "openaire_data" },
             { datestamp: formatDate(new Date()) }
@@ -78,17 +75,21 @@ export class OpenaireMapper implements ProviderDCMapper {
                     { _attr: { identifierType: "URL" } },
                     `https://doi.org/${record.pid}`
                   ]
-                }, record.dataDescription ? 
-                  {
-                    "datacite:descriptions": [
-                      {
-                        description: [
-                          { _attr: { descriptionType: "Abstract" } },
-                          record.dataDescription
-                        ]
-                      }
-                    ]
-                  } : { /* ignore abstract if it doesn't exist */ },
+                },
+                record.dataDescription
+                  ? {
+                      "datacite:descriptions": [
+                        {
+                          description: [
+                            { _attr: { descriptionType: "Abstract" } },
+                            record.dataDescription
+                          ]
+                        }
+                      ]
+                    }
+                  : {
+                      /* ignore abstract if it doesn't exist */
+                    },
                 {
                   "datacite:dates": [
                     {
@@ -96,28 +97,41 @@ export class OpenaireMapper implements ProviderDCMapper {
                         { _attr: { dateType: "Issued" } },
                         formatDate(record.creationTime)
                       ]
-                    }, record.availableTime ? 
-                      {
-                        "datacite:date": [
-                          { _attr: { dateType: "Available" } },
-                          formatDate(record.availableTime)
-                        ]
-                      } : { /* ignore available time if it doesn't exist */ }
+                    },
+                    record.availableTime
+                      ? {
+                          "datacite:date": [
+                            { _attr: { dateType: "Available" } },
+                            formatDate(record.availableTime)
+                          ]
+                        }
+                      : {
+                          /* ignore available time if it doesn't exist */
+                        }
                   ]
                 },
                 { "datacite:publicationYear": record.publicationYear },
-                { "datacite:resourceType": "Dataset" },
                 {
-                  "datacite:creators": record.creator.map((creator: string, index: number) => ({
-                    creator: [
-                      {
-                        creatorName: creator
-                      }, 
-                      {
-                        affiliation: record.affiliations ? record.affiliations[index] : record.affiliation
-                      }
-                    ]
-                  }))
+                  "datacite:resourceType": [
+                    { _attr: { resourceTypeGeneral: "Dataset" } },
+                    "Dataset"
+                  ]
+                },
+                {
+                  "datacite:creators": record.creator.map(
+                    (creator: string, index: number) => ({
+                      creator: [
+                        {
+                          creatorName: creator
+                        },
+                        {
+                          affiliation: record.affiliations
+                            ? record.affiliations[index]
+                            : record.affiliation
+                        }
+                      ]
+                    })
+                  )
                 },
                 { "datacite:publisher": record.publisher }, //category?/ source?
                 { "datacite:version": 1 }, //category?/ source?
@@ -184,10 +198,7 @@ export class OpenaireMapper implements ProviderDCMapper {
       let item = {
         record: [
           {
-            header: [
-              { identifier: record.pid },
-              { datestamp: updatedAt }
-            ]
+            header: [{ identifier: record.pid }, { datestamp: updatedAt }]
           }
         ]
       };
