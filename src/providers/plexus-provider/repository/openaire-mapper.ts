@@ -106,6 +106,7 @@ export class OpenaireMapper implements ProviderDCMapper {
                   ]
                 },
                 { "datacite:publicationYear": record.publicationYear },
+                { "datacite:resourceType": "Dataset" },
                 {
                   "datacite:creators": record.creator.map((creator: string, index: number) => ({
                     creator: [
