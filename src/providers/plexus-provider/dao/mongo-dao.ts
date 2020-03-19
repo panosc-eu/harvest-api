@@ -22,7 +22,7 @@ export class MongoConnector {
     }*/
     const url = `mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}`;
 
-    MongoClient.connect(url, (err, client) => {
+    MongoClient.connect(url,  { useUnifiedTopology: true }, (err, client) => {
       if (err) {
         logger.error("failed to connect", err);
         this.db = null;

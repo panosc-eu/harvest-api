@@ -11,7 +11,7 @@
   "scripts": {
     "start": "cd dist && NODE_ENV=production node index",
     "compile": "gulp dist-clean && gulp build && gulp copy-production",
-    "dev": "gulp build && gulp copy && cd dist && node index | pino-pretty -o 'short'",
+    "dev": "gulp build && gulp copy && cd dist && node index | pino-pretty ",
     "test": "node build.js && mocha test/**/*.ts --exit"
   },
   "dependencies": {
