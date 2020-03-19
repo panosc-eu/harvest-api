@@ -11,7 +11,7 @@
   "scripts": {
     "start": "cd dist && NODE_ENV=production node index",
     "compile": "gulp dist-clean && gulp build && gulp copy-production",
-    "dev": "gulp build && gulp copy && cd dist && node index | pino -o 'short'",
+    "dev": "gulp build && gulp copy && cd dist && node index | pino-pretty -o 'short'",
     "test": "node build.js && mocha test/**/*.ts --exit"
   },
   "dependencies": {
@@ -34,6 +34,7 @@
     "mongodb": "^3.5.5",
     "mysql": "^2.18.1",
     "pino": "^5.17.0",
+    "pino-pretty": "^3.6.1",
     "xml": "^1.0.1",
     "xmldom": "^0.3.0",
     "xo": "^0.28.0"
