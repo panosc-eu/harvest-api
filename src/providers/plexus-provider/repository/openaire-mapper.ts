@@ -125,12 +125,12 @@ export class OpenaireMapper implements ProviderDCMapper {
                       const reverse = parsed.lastName+", "+parsed.firstName;
                       return (
                         {
-                          "datacite:creator": [
+                          "creator": [
                             {
-                              "datacite:creatorName": reverse
+                              "creatorName": reverse
                             },
                             {
-                              "datacite:affiliation": record.affiliations
+                              "affiliation": record.affiliations
                                 ? record.affiliations[index]
                                 : record.affiliation
                             }
