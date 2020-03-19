@@ -10,8 +10,8 @@ The National Library of Finland.
 
 ## Dependencies
 
-* Node 8.9.4+
-* Typescript 2.7.2+
+* Node 10+
+* Typescript 3+
 * npm 5.6.0+
 
 ## Capabilities
