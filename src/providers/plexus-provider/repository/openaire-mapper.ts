@@ -81,7 +81,7 @@ export class OpenaireMapper implements ProviderDCMapper {
                   ? {
                       "datacite:descriptions": [
                         {
-                          description: [
+                          "datacite:description": [
                             { _attr: { descriptionType: "Abstract" } },
                             record.dataDescription
                           ]
@@ -125,12 +125,12 @@ export class OpenaireMapper implements ProviderDCMapper {
                       const reverse = parsed.lastName+", "+parsed.firstName;
                       return (
                         {
-                          creator: [
+                          "datacite:creator": [
                             {
-                              creatorName: reverse
+                              "datacite:creatorName": reverse
                             },
                             {
-                              affiliation: record.affiliations
+                              "datacite:affiliation": record.affiliations
                                 ? record.affiliations[index]
                                 : record.affiliation
                             }
