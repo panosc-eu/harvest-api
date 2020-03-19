@@ -1,5 +1,5 @@
 {
-  "name": "OAI-PMH-Service",
+  "name": "oai-pmh-service",
   "version": "1.0.0",
   "description": "A standalone OAI-PMH provider for Nodejs that can support multiple data sources.",
   "main": "index.js",
