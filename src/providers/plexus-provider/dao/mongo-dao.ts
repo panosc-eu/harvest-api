@@ -100,7 +100,7 @@ export class MongoConnector {
       const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
       return new Promise((resolve: any, reject: any) => {
         const query = {
-          pid: parameters.identifier
+          oaiIdentifier: parameters.identifier
         };
         collection.findOne(query, {}, function(err, item) {
           if (err) {

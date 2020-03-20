@@ -45,7 +45,7 @@ export class OpenaireMapper implements ProviderDCMapper {
         {
           header: [
             {
-              identifier: record.pid
+              identifier: record.oaiIdentifier
 
             },
             { setSpec: "openaire_data" },
