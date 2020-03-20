@@ -57,7 +57,7 @@ export class OpenaireMapper implements ProviderDCMapper {
               "datacite:resource": [
                 {
                   _attr: {
-                    "xmlns:datacite": "http://datacite.org/schema/kernel-4",
+                    "xmlns:datacite": "http://datacite.org/schema/kernel-3",
                     "xsi:schemaLocation":
                       "http://datacite.org/schema/kernel-3" +
                       "http://schema.datacite.org/meta/kernel-3/metadata.xsd"
