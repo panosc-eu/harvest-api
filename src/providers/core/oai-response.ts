@@ -38,8 +38,7 @@ const responseTemplate = {
                     xmlns: 'http://www.openarchives.org/OAI/2.0/',
                     'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
                     'xmlns:dc': 'http://purl.org/dc/elements/1.1/',
-                    'xsi:schemaLocation': 'http://www.openarchives.org/OAI/2.0/ ' +
-                    '\nhttp://www.openarchives.org/OAI/2.0/OAI-PMH.xsd'
+                    'xsi:schemaLocation': 'http://schema.datacite.org/oai/oai-1.0/ oai_datacite.xsd'
                 }
         },
         {responseDate: new Date().toISOString()}
