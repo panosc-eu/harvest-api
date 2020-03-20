@@ -46,7 +46,6 @@ export class OpenaireMapper implements ProviderDCMapper {
           header: [
             {
               identifier: record.oaiIdentifier
-
             },
             { setSpec: "openaire_data" },
             { datestamp: formatDate(new Date()) }
@@ -136,6 +135,13 @@ export class OpenaireMapper implements ProviderDCMapper {
                 },
                 { "datacite:publisher": record.publisher }, //category?/ source?
                 { "datacite:version": 1 }, //category?/ source?
+                {
+                  "datacite:subjects": [
+                    {
+                      "datacite:subject": "Photon and neutron data"
+                    }
+                  ]
+                },
                 {
                   "datacite:rightsList": [
                     {
