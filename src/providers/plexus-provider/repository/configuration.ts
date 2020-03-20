@@ -31,7 +31,7 @@ import {ProviderConfiguration} from "../../core/oai-service";
 export class Configuration implements ProviderConfiguration {
 
   public repositoryName: string = "Scicat Provider";
-  public baseURL: string = `http://localhost:3000${this.basePath}`;
+  public baseURL: string = process.env.BASE_URL;
   public protocolVersion: string = '2.0';
   public adminEmail: string = process.env.ADMIN_USER_EMAIL;
   public port: number = 3000;

@@ -57,17 +57,12 @@ export class OpenaireMapper implements ProviderDCMapper {
               "datacite:resource": [
                 {
                   _attr: {
-                    "xmlns:rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-                    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-                    "xmlns:dcterms": "http://purl.org/dc/terms/",
                     "xmlns:datacite": "http://datacite.org/schema/kernel-4",
-                    xmlns: "http://namespace.openaire.eu/schema/oaire/",
                     "xsi:schemaLocation":
-                      "http://www.openarchives.org/OAI/2.0/oai_dc/ " +
-                      "https://www.openaire.eu/schema/repo-lit/4.0/openaire.xsd"
+                      "http://datacite.org/schema/kernel-3" +
+                      "http://schema.datacite.org/meta/kernel-3/metadata.xsd"
                   }
                 },
-                // ......does it matter what these fields are called?
                 {
                   "datacite:titles": [{ "datacite:title": record.title }]
                 },
@@ -122,20 +117,19 @@ export class OpenaireMapper implements ProviderDCMapper {
                   "datacite:creators": record.creator.map(
                     (creator: string, index: number) => {
                       const parsed = humanname.parse(creator);
-                      const reverse = parsed.lastName+", "+parsed.firstName;
-                      return (
-                        {
-                          creator: [
-                            {
-                              creatorName: reverse
-                            },
-                            {
-                              affiliation: record.affiliations
-                                ? record.affiliations[index]
-                                : record.affiliation
-                            }
-                          ]
-                        })
+                      const reverse = parsed.lastName + ", " + parsed.firstName;
+                      return {
+                        creator: [
+                          {
+                            creatorName: reverse
+                          },
+                          {
+                            affiliation: record.affiliations
+                              ? record.affiliations[index]
+                              : record.affiliation
+                          }
+                        ]
+                      };
                     }
                   )
                 },
@@ -156,7 +150,6 @@ export class OpenaireMapper implements ProviderDCMapper {
                   ]
                 }
               ] //rights?
-              // .....add more fields here
             }
           ]
         }
