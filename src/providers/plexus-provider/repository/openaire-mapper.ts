@@ -52,115 +52,134 @@ export class OpenaireMapper implements ProviderDCMapper {
           ]
         },
         {
-          metadata: 
-               [
+          metadata: [
+            {
+              oai_datacite: [
                 {
-                  "datacite:resource": [
+                  _attr: {
+                    xmlns: "http://schema.datacite.org/oai/oai-1.0/",
+                    "xsi:schemaLocation" : "http://schema.datacite.org/oai/oai-1.0/ oai_datacite.xsd"
+                  }
+                },
+                { schemaVersion: 3.1 },
+                { datacentreSymbol: "SCICAT.ESS" },
+                {
+                  payload: [
                     {
-                      _attr: {
-                        "xmlns:datacite": "http://datacite.org/schema/kernel-3",
-                        "xsi:schemaLocation":
-                          "http://datacite.org/schema/kernel-3" +
-                          "http://schema.datacite.org/meta/kernel-3/metadata.xsd"
-                      }
-                    },
-                    {
-                      "datacite:titles": [{ "datacite:title": record.title }]
-                    },
-                    {
-                      "datacite:identifier": [
-                        { _attr: { identifierType: "URL" } },
-                        `https://doi.org/${record.pid}`
-                      ]
-                    },
-                    record.dataDescription
-                      ? {
-                          "datacite:descriptions": [
-                            {
-                              "datacite:description": [
-                                { _attr: { descriptionType: "Abstract" } },
-                                record.dataDescription
-                              ]
-                            }
-                          ]
-                        }
-                      : {
-                          /* ignore abstract if it doesn't exist */
-                        },
-                    {
-                      "datacite:dates": [
+                      "datacite:resource": [
                         {
-                          "datacite:date": [
-                            { _attr: { dateType: "Issued" } },
-                            formatDate(record.creationTime)
+                          _attr: {
+                            "xmlns:datacite":
+                              "http://datacite.org/schema/kernel-3",
+                            "xsi:schemaLocation":
+                              "http://datacite.org/schema/kernel-3" +
+                              "http://schema.datacite.org/meta/kernel-3/metadata.xsd"
+                          }
+                        },
+                        {
+                          "datacite:titles": [
+                            { "datacite:title": record.title }
                           ]
                         },
-                        record.availableTime
+                        {
+                          "datacite:identifier": [
+                            { _attr: { identifierType: "URL" } },
+                            `https://doi.org/${record.pid}`
+                          ]
+                        },
+                        record.dataDescription
                           ? {
-                              "datacite:date": [
-                                { _attr: { dateType: "Available" } },
-                                formatDate(record.availableTime)
+                              "datacite:descriptions": [
+                                {
+                                  "datacite:description": [
+                                    { _attr: { descriptionType: "Abstract" } },
+                                    record.dataDescription
+                                  ]
+                                }
                               ]
                             }
                           : {
-                              /* ignore available time if it doesn't exist */
-                            }
-                      ]
-                    },
-                    { "datacite:publicationYear": record.publicationYear },
-                    {
-                      "datacite:resourceType": [
-                        { _attr: { resourceTypeGeneral: "Dataset" } },
-                        "Dataset"
-                      ]
-                    },
-                    {
-                      "datacite:creators": record.creator.map(
-                        (creator: string, index: number) => {
-                          const parsed = humanname.parse(creator);
-                          const reverse =
-                            parsed.lastName + ", " + parsed.firstName;
-                          return {
-                            creator: [
-                              {
-                                creatorName: reverse
-                              },
-                              {
-                                affiliation: record.affiliations
-                                  ? record.affiliations[index]
-                                  : record.affiliation
-                              }
-                            ]
-                          };
-                        }
-                      )
-                    },
-                    { "datacite:publisher": record.publisher }, //category?/ source?
-                    { "datacite:version": 1 }, //category?/ source?
-                    {
-                      "datacite:subjects": [
-                        {
-                          "datacite:subject": "Photon and neutron data"
-                        }
-                      ]
-                    },
-                    {
-                      "datacite:rightsList": [
-                        {
-                          "datacite:rights": [
-                            {
-                              _attr: {
-                                rightsURI: "info:eu-repo/semantics/openAccess"
-                              }
+                              /* ignore abstract if it doesn't exist */
                             },
-                            "OpenAccess"
+                        {
+                          "datacite:dates": [
+                            {
+                              "datacite:date": [
+                                { _attr: { dateType: "Issued" } },
+                                formatDate(record.creationTime)
+                              ]
+                            },
+                            record.availableTime
+                              ? {
+                                  "datacite:date": [
+                                    { _attr: { dateType: "Available" } },
+                                    formatDate(record.availableTime)
+                                  ]
+                                }
+                              : {
+                                  /* ignore available time if it doesn't exist */
+                                }
+                          ]
+                        },
+                        { "datacite:publicationYear": record.publicationYear },
+                        {
+                          "datacite:resourceType": [
+                            { _attr: { resourceTypeGeneral: "Dataset" } },
+                            "Dataset"
+                          ]
+                        },
+                        {
+                          "datacite:creators": record.creator.map(
+                            (creator: string, index: number) => {
+                              const parsed = humanname.parse(creator);
+                              const reverse =
+                                parsed.lastName + ", " + parsed.firstName;
+                              return {
+                                creator: [
+                                  {
+                                    creatorName: reverse
+                                  },
+                                  {
+                                    affiliation: record.affiliations
+                                      ? record.affiliations[index]
+                                      : record.affiliation
+                                  }
+                                ]
+                              };
+                            }
+                          )
+                        },
+                        { "datacite:publisher": record.publisher }, //category?/ source?
+                        { "datacite:version": 1 }, //category?/ source?
+                        {
+                          "datacite:subjects": [
+                            {
+                              "datacite:subject": "Photon and neutron data"
+                            }
+                          ]
+                        },
+                        {
+                          "datacite:rightsList": [
+                            {
+                              "datacite:rights": [
+                                {
+                                  _attr: {
+                                    rightsURI:
+                                      "info:eu-repo/semantics/openAccess"
+                                  }
+                                },
+                                "OpenAccess"
+                              ]
+                            }
                           ]
                         }
-                      ]
+                      ] //rights?
                     }
-                  ] //rights?
+                  ]
                 }
               ]
+            }
+          ]
         }
       ]
     };
