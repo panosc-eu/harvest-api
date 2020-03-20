@@ -47,8 +47,8 @@ export class OpenaireMapper implements ProviderDCMapper {
             {
               identifier: record.oaiIdentifier
             },
-            { setSpec: "openaire_data" },
-            { datestamp: formatDate(new Date()) }
+            { datestamp: formatDate(new Date()) },
+            { setSpec: "openaire_data" }
           ]
         },
         {
@@ -58,7 +58,8 @@ export class OpenaireMapper implements ProviderDCMapper {
                 {
                   _attr: {
                     xmlns: "http://schema.datacite.org/oai/oai-1.0/",
-                    "xsi:schemaLocation" : "http://schema.datacite.org/oai/oai-1.0/ oai_datacite.xsd"
+                    "xsi:schemaLocation":
+                      "http://schema.datacite.org/oai/oai-1.0/ oai_datacite.xsd"
                   }
                 },
                 { schemaVersion: 3.1 },
