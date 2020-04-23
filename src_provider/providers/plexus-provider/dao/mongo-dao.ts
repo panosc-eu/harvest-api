@@ -20,14 +20,14 @@ export class MongoConnector {
     /*if (hasCredentialsFile(credFile)) {
       const creds = getCredentials(credFile);
     }*/
-    const url = `mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}`;
+    const url = `mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}/${process.env.DATABASE}`;
 
     MongoClient.connect(url,  { useUnifiedTopology: true }, (err, client) => {
       if (err) {
         logger.error("failed to connect", err);
         this.db = null;
       }
-      this.db = client.db(process.env.DB_DATABASE_NAME);
+      this.db = client.db(process.env.DATABASE);
     });
   }
 

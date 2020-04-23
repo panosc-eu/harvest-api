@@ -8,6 +8,6 @@ WORKDIR /
 COPY package.json /
 ENV NODE_ENV=production
 RUN npm prune
-COPY ./dist /
+COPY ./dist_provider /
 COPY ./node_modules /node_modules
 CMD ["node", "index.js"]

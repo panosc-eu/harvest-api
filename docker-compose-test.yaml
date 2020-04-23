@@ -1,0 +1,93 @@
+version: '3.0'
+services:
+
+  test-mongo-db:
+    image: mongo:latest
+
+  test-harvester:
+    image: oai-pmh-harvester:1.0.0
+    volumes:
+      - ./test/.env:/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications
+      - OAI_PMH_SOURCES=http://test-provider-01:3000/openaire/oai?verb=ListRecords&metadataPrefix=oai_datacite,http://test-provider-02:3000/openaire/oai?verb=ListRecords&metadataPrefix=oai_datacite,http://test-provider-03:3000/openaire/oai?verb=ListRecords&metadataPrefix=oai_datacite,http://test-provider-04:3000/openaire/oai?verb=ListRecords&metadataPrefix=oai_datacite,http://test-provider-06:3000/openaire/oai?verb=ListRecords&metadataPrefix=oai_datacite
+    restart: always
+
+  test-common-provider:
+    image: oai-pmh-provider:1.0.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./test/.env:/server/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications
+    restart: always
+
+  test-provider-01:
+    image: oai-pmh-provider:1.0.0
+    ports:
+      - "3011:3000"
+    volumes:
+      - ./test/.env:/server/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications-01
+    restart: always
+
+  test-provider-02:
+    image: oai-pmh-provider:1.0.0
+    ports:
+      - "3012:3000"
+    volumes:
+      - ./test/.env:/server/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications-02
+    restart: always
+
+  test-provider-03:
+    image: oai-pmh-provider:1.0.0
+    ports:
+      - "3013:3000"
+    volumes:
+      - ./test/.env:/server/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications-03
+
+    restart: always
+
+  test-provider-04:
+    image: oai-pmh-provider:1.0.0
+    ports:
+      - "3014:3000"
+    volumes:
+      - ./test/.env:/server/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications-04
+    restart: always
+
+  test-provider-05:
+    image: oai-pmh-provider:1.0.0
+    ports:
+      - "3015:3000"
+    volumes:
+      - ./test/.env:/server/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications-05
+    restart: always
+
+  test-provider-06:
+    image: oai-pmh-provider:1.0.0
+    ports:
+      - "3016:3000"
+    volumes:
+      - ./test/.env:/server/.env
+    environment:
+      - DB_HOSTNAME=test-mongo-db
+      - DATABASE=oai-publications-06
+    restart: always

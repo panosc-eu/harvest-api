@@ -28,7 +28,7 @@ var ts = require("gulp-typescript");
 require('source-map-support').install();
 
 gulp.task("build", function () {
-    return gulp.src("src/**/*.ts")
+    return gulp.src("src_harvester/**/*.ts")
         .pipe(ts({
             noImplicitAny: false,
             target: "es6",
@@ -40,15 +40,39 @@ gulp.task("build", function () {
 
 gulp.task("copy", function() {
     return gulp.src([".env"])
-        .pipe(gulp.dest("dist/server"));
+        .pipe(gulp.dest("dist"));
 });
 
 gulp.task("copy-production", function() {
     return gulp.src(["production/.env"])
-        .pipe(gulp.dest("dist/server"));
+        .pipe(gulp.dest("dist"));
 });
+
 gulp.task("dist-clean", function() {
-    return del(["dist/**/*", "dist/server/.env"]);
+    return del(["dist/**/*", "dist/.env"]);
 });
 
+gulp.task("build-provider", function () {
+    return gulp.src("src_provider/**/*.ts")
+        .pipe(ts({
+            noImplicitAny: false,
+            target: "es6",
+            module: "commonjs",
+            sourceMap: true,
 
+        })).pipe(gulp.dest("dist_provider"));
+});
+
+gulp.task("copy-provider", function() {
+    return gulp.src([".env"])
+        .pipe(gulp.dest("dist_provider/server"));
+});
+
+gulp.task("copy-provider-production", function() {
+    return gulp.src(["production/.env"])
+        .pipe(gulp.dest("dist_provider/server"));
+});
+
+gulp.task("dist-provider-clean", function() {
+    return del(["dist_provider/**/*", "dist_provider/server/.env"]);
+});
