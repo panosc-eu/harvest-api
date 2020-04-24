@@ -24,7 +24,6 @@ export class MongoConnector {
                 console.log(err);
             }
             this.db = client.db(this.dbName);
-            logger.error(this.db);
         });
     }
 

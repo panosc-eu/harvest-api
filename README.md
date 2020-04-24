@@ -1,12 +1,6 @@
-# OAI-PMH Service
+# OAI-PMH Harvester
 
-Credit upstream author hatfieldlibrary/oai-provider-service.
-
-OAI-PMH Service is a Nodejs Express application that supports multiple, configurable [OAI-PMH version 2.0](https://www.openarchives.org/OAI/openarchivesprotocol.html) data providers.
-
-OAI-PMH Service borrows from the [Modular OAI-PMH Server](https://github.com/NatLibFi/oai-pmh-server), University of Helsinki, 
-The National Library of Finland. 
- 
+OAI-PMH Harvester prototype based on the [Aggregator](http://www.openarchives.org/OAI/2.0/guidelines-aggregator.htm) documentation.
 
 ## Dependencies
 
@@ -16,7 +10,7 @@ The National Library of Finland.
 
 ## Capabilities
 
-Supports `Identify`, `ListMetadataFormats`, `GetRecord`, `ListIdentifiers` and `ListRecords`. The optional
+Common provider supports `Identify`, `ListMetadataFormats`, `GetRecord`, `ListIdentifiers` and `ListRecords`. The optional
 `from` and `until` arguments are supported for selective harvesting with `YYYY-MM-DDThh:mm:ssZ` granularity.  `ListSets` is supported for OpenAIRE.  
 
 ## Runtime configuration
@@ -34,25 +28,13 @@ DB_DATABASE_NAME=oai-publications
 ADMIN_USER_EMAIL=name@somewhere.com
 ```
 
-## Install It
-```
-npm install
-```
-
 ## Setup mongodb
 
 For mongodb, you need a mongodb instance running in the background.
 It can serve on localhost at port 27017.
 It should provide database with a collection as defined in the mongo-dao.ts connector.
 
-## Run It
-#### Run in *development* mode:
-
-```
-npm run dev
-```
-
-#### Routes:
+## Routes (common provider):
 
 The Express server will start on default port 3000.  
 
@@ -64,28 +46,52 @@ The Express server will start on default port 3000.
 
 
 
-## Run in *production* mode:
+## Run in *production* mode (harvester part):
 
 At the simplest level:
 ```
+npm install
 npm run compile
 npm start
 ```
-## Dockerize:
 
-```
-npm run compile
-docker-compose build
-docker-compose up
-```
-
-The gulp tasks compile Typescript and copy files to `dist`.
+The gulp tasks compile Typescript and copy files to `dist` and `dist_provider`.
 
 The project can be deployed to a production server and started with `node index` from within `dist`. Runtime configurations
 can be adjusted using `.env` and (recommended) external configuration files created for your environment. We typically run as server daemon using [forever](https://github.com/foreverjs/forever), or some tool 
 to assure that the server runs continuously.  
 
+## Dockerize:
 
+#### Create images:
+```
+npm install
+npm run compile
+npm run compile-provider
+. docker_build.sh
+```
 
+#### Test environment:
 
+![Architecture](https://raw.githubusercontent.com/panosc-eu/harvest-api/dev/federated_harvester/docs/assets/images/architecture.png "The Architecture logo") 
+
+Start test environment:
+
+```
+docker-compose -f docker-compose-test.yaml up -d
+```
+
+Upload test data:
+
+```
+node test/upload.js oai-publications-01 '{"oaiIdentifier":"191234/PAN-TESTDATA.TEST-001", "title":"Test document", "description":"Test document", "publicationYear":"2020", "creator":"Test Creator", "affiliation":"PAN", "publisher":"PAN"}'
+```
+
+```oai-publications-01``` is the database identifier. Test enviroment contains the next databases:
+* oai-publications-01
+* oai-publications-02
+* oai-publications-03
+* oai-publications-04
+* oai-publications-05
+* oai-publications-06
 
