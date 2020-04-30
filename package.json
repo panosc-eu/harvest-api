@@ -47,7 +47,7 @@
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^6.0.87",
+    "@types/node": "^13.13.4",
     "awesome-typescript-loader": "^5.2.1",
     "backpack-core": "^0.8.4",
     "browser-sync": "^2.26.7",
