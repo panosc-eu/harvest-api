@@ -38,11 +38,11 @@ It should provide database with a collection as defined in the mongo-dao.ts conn
 
 The Express server will start on default port 3000.  
 
-* [`http://localhost:3000/scicat/oai?verb=Identify`](http://localhost:3000/scicat/oai?verb=Identify)
-* [`http://localhost:3000/scicat/oai?verb=ListMetadataFormats`](http://localhost:3000/scicat/oai?verb=ListMetadataFormats)
-* [`http://localhost:3000/scicat/oai?verb=GetRecord&identifier=1&metadataPrefix=oai_dc`](http://localhost:3000/scicat/oai?verb=GetRecord&identifier=1&metadataPrefix=oai_dc)
-* [`http://localhost:3000/scicat/oai?verb=ListIdentifiers&metadataPrefix=oai_dc`](http://localhost:3000/scicat/oai?verb=ListIdentifiers&metadataPrefix=oai_dc)
-* [`http://localhost:3000/scicat/oai?verb=ListRecords&metadataPrefix=oai_dc`](http://localhost:3000/scicat/oai?verb=ListRecords&metadataPrefix=oai_dc)
+* [`http://localhost:3000/openaire/oai?verb=Identify`](http://localhost:3000/openaire/oai?verb=Identify)
+* [`http://localhost:3000/openaire/oai?verb=ListMetadataFormats`](http://localhost:3000/openaire/oai?verb=ListMetadataFormats)
+* [`http://localhost:3000/openaire/oai?verb=GetRecord&identifier=1&metadataPrefix=oai_dc`](http://localhost:3000/openaire/oai?verb=GetRecord&identifier=1&metadataPrefix=oai_dc)
+* [`http://localhost:3000/openaire/oai?verb=ListIdentifiers&metadataPrefix=oai_dc`](http://localhost:3000/openaire/oai?verb=ListIdentifiers&metadataPrefix=oai_dc)
+* [`http://localhost:3000/openaire/oai?verb=ListRecords&metadataPrefix=oai_dc`](http://localhost:3000/openaire/oai?verb=ListRecords&metadataPrefix=oai_dc)
 
 
 

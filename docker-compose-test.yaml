@@ -3,7 +3,8 @@ services:
 
   test-mongo-db:
     image: mongo:latest
-
+    ports:
+      - "27017:27017"
   test-harvester:
     image: oai-pmh-harvester:1.0.0
     volumes:
