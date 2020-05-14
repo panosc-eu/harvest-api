@@ -104,10 +104,18 @@ export class OpenaireMapper implements ProviderDCMapper {
                             },
                         {
                           "datacite:dates": [
-                            {
+                            record.creationTime
+                            ? {
                               "datacite:date": [
                                 { _attr: { dateType: "Issued" } },
                                 formatDate(record.creationTime)
+                              ]
+                            }
+                            : {
+                              "datacite:date": [
+                                { _attr: { dateType: "Issued" } },
+                                formatDate(new Date(`${record.publicationYear}-01-01`))
+                                /* use publicationYear if creationTime doesn't exist */
                               ]
                             },
                             record.availableTime
