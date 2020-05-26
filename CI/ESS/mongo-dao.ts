@@ -21,8 +21,7 @@ export class MongoConnector {
     /*if (hasCredentialsFile(credFile)) {
       const creds = getCredentials(credFile);
     }*/
-    const url = "mongodb://" + process.env.DB_HOSTNAME + ":27017";console.log(url);
-	console.log(url);
+    const url = "mongodb://" + process.env.DB_HOSTNAME + ":27017";
 
     MongoClient.connect(url, (err, client) => {
       if (err) {
