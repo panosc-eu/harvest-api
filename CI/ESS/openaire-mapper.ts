@@ -234,7 +234,7 @@ export class OpenaireMapper implements ProviderDCMapper {
       let item = {
         record: [
           {
-            header: [{ identifier: record.pid }, { datestamp: updatedAt }]
+            header: [{ identifier: record._id.toString() }, { datestamp: updatedAt }]
           }
         ]
       };
