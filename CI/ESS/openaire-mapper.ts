@@ -45,7 +45,10 @@ export class OpenaireMapper implements ProviderDCMapper {
         {
           header: [
             {
-              identifier: record.oaiIdentifier
+              identifier: [
+                { _attr: { identifierType: "doi" } },
+                record._id.toString()
+              ]
             },
             { datestamp: formatDate(new Date()) },
             { setSpec: "openaire_data" }
