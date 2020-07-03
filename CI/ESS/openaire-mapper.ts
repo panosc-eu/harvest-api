@@ -91,20 +91,30 @@ export class OpenaireMapper implements ProviderDCMapper {
                             `https://doi.org/${record._id.toString()}`
                           ]
                         },
-                        record.dataDescription
-                          ? {
-                              "datacite:descriptions": [
-                                {
-                                  "datacite:description": [
-                                    { _attr: { descriptionType: "Abstract" } },
-                                    record.dataDescription
-                                  ]
-                                }
+                        {
+                          "datacite:descriptions": [
+                            record.abstract
+                            ? {
+                              "datacite:description": [
+                                { _attr: { descriptionType: "Abstract" } },
+                                record.abstract
                               ]
                             }
-                          : {
+                            : {
                               /* ignore abstract if it doesn't exist */
                             },
+                            record.dataDescription
+                            ? {
+                              "datacite.description": [
+                                { _attr: { descriptionType: "Other" } },
+                                record.dataDescription
+                              ]
+                            }
+                            : {
+                              /* ignore dataDescription if it doesn't exist */
+                            }
+                          ]
+                        },
                         {
                           "datacite:dates": [
                             record.creationTime
