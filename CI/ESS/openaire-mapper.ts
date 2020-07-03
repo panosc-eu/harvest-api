@@ -105,7 +105,7 @@ export class OpenaireMapper implements ProviderDCMapper {
                             },
                             record.dataDescription
                             ? {
-                              "datacite.description": [
+                              "datacite:description": [
                                 { _attr: { descriptionType: "Other" } },
                                 record.dataDescription
                               ]
