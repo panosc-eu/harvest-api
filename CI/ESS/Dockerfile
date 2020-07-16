@@ -5,7 +5,6 @@ COPY package.json /usr/src/app/
 COPY . /usr/src/app/
 COPY CI/ESS/.env /usr/src/app/production/.env
 COPY CI/ESS/.env /usr/src/app/.env
-COPY CI/ESS/mongo-dao.ts /usr/src/app/src/providers/plexus-provider/dao/mongo-dao.ts
 COPY CI/ESS/openaire-mapper.ts /usr/src/app/src/providers/plexus-provider/repository/openaire-mapper.ts
 RUN npm install
 RUN npm run compile
