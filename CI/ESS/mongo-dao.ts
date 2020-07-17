@@ -98,7 +98,7 @@ export class MongoConnector {
       let PublishedData = this.db.collection("PublishedData");
       return new Promise((resolve: any, reject: any) => {
         const query = {
-          _id: ObjectId(parameters.identifier),
+          _id: parameters.identifier,
         };
         PublishedData.findOne(query, {}, function(err, item) {
           if (err) {
