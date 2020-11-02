@@ -1,6 +1,6 @@
 import logger from "../../../server/logger";
 import { reject } from "bluebird";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 
 /**
  * This is the DAO service for Scicat. It uses a mongo connection
@@ -27,7 +27,7 @@ export class MongoConnector {
         logger.error("failed to connect", err);
         this.db = null;
       }
-      this.db = client.db("dacat");
+      this.db = client.db(process.env.DB_DATABASE_NAME);
     });
   }
 
@@ -50,9 +50,9 @@ export class MongoConnector {
    */
   public recordsQuery(parameters: any): Promise<any> {
     if (this.db) {
-      let PublishedData = this.db.collection("PublishedData");
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
       return new Promise((resolve: any, reject: any) => {
-        PublishedData.find().toArray(function(err, items) {
+        collection.find().toArray(function(err, items) {
           if (err) {
             reject(err);
           } else {
@@ -72,10 +72,10 @@ export class MongoConnector {
    */
   public identifiersQuery(parameters: any): Promise<any> {
     if (this.db) {
-      let PublishedData = this.db.collection("PublishedData");
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
       return new Promise((resolve: any, reject: any) => {
         // need to add relevant date to projection
-        PublishedData.find({}, { _id: 1 }).toArray(function(err, items) {
+        collection.find({}, { _id: 1 }).toArray(function(err, items) {
           if (err) {
             reject(err);
           } else {
@@ -95,12 +95,12 @@ export class MongoConnector {
    */
   public getRecord(parameters: any): Promise<any> {
     if (this.db) {
-      let PublishedData = this.db.collection("PublishedData");
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
       return new Promise((resolve: any, reject: any) => {
         const query = {
           _id: parameters.identifier,
         };
-        PublishedData.findOne(query, {}, function(err, item) {
+        collection.findOne(query, {}, function(err, item) {
           if (err) {
             reject(err);
           } else {
@@ -113,9 +113,9 @@ export class MongoConnector {
     }
   }
 
-  private aggregatePublishedDataQuery(pipeline: any): Promise<any> {
+  private aggregatePublicationQuery(pipeline: any): Promise<any> {
     if (this.db) {
-      var collection = this.db.collection("PublishedData");
+      const collection = this.db.collection(process.env.DB_COLLECTION_NAME);
       var resolve = null;
       return new Promise((resolve: any, err: any) => {
         var resolve = collection.aggregate(pipeline, function(err, cursor) {

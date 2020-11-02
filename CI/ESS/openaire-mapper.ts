@@ -1,5 +1,6 @@
 import logger from "../../../server/logger";
 import { ProviderDCMapper } from "../../core/core-oai-provider";
+import * as filesize from filesize;
 const humanname = require("humanname");
 
 export class OpenaireMapper implements ProviderDCMapper {
@@ -167,6 +168,13 @@ export class OpenaireMapper implements ProviderDCMapper {
                           "datacite:subjects": [
                             {
                               "datacite:subject": "Photon and neutron data"
+                            }
+                          ]
+                        },
+                        {
+                          "datacite:sizes": [
+                            {
+                              "datacite.size": filesize(record.sizeOfArchive || 0, {round: 0})
                             }
                           ]
                         },
