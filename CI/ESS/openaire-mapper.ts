@@ -1,6 +1,6 @@
 import logger from "../../../server/logger";
 import { ProviderDCMapper } from "../../core/core-oai-provider";
-import * as filesize from filesize;
+import * as filesize from "filesize";
 const humanname = require("humanname");
 
 export class OpenaireMapper implements ProviderDCMapper {
