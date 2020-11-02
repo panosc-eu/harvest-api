@@ -174,7 +174,7 @@ export class OpenaireMapper implements ProviderDCMapper {
                         {
                           "datacite:sizes": [
                             {
-                              "datacite.size": filesize(record.sizeOfArchive || 0, {round: 0})
+                              "datacite:size": filesize(record.sizeOfArchive || 0, {round: 0})
                             }
                           ]
                         },
