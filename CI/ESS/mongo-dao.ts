@@ -21,6 +21,7 @@ export class MongoConnector {
       const creds = getCredentials(credFile);
     }*/
     const url = `mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}`;
+    logger.debug("MongoBD URL: " + url);
 
     MongoClient.connect(url, (err, client) => {
       if (err) {
