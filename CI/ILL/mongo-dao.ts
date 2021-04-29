@@ -14,16 +14,8 @@ export class MongoConnector {
   private constructor() {
     logger.debug("Setting up the mongo connection.");
 
-    // Get path from the environment.
-    const credFile = process.env.SCICAT_CONFIGURATION;
-
-    /*if (hasCredentialsFile(credFile)) {
-      const creds = getCredentials(credFile);
-    }*/
-    const url = `mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}`;
-    logger.debug("MongoBD URL: " + url);
-
-    MongoClient.connect(url, (err, client) => {
+    const url = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOSTNAME}:${process.env.DB_PORT}/${process.env.DB_DATABASE_NAME}`;
+    MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
       if (err) {
         logger.error("failed to connect", err);
         this.db = null;
