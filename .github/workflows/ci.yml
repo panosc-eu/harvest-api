@@ -1,0 +1,38 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test_build:
+    name: Test Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      
+      - name: Build
+        run: |
+          cp CI/ESS/.env production/.env
+          npm ci
+          npm run compile
+
+  gitlab:
+    name: Build and deploy
+    needs: [test_build]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger ESS pipeline
+      uses: appleboy/gitlab-ci-action@master
+      with:
+        url: "https://gitlab.esss.lu.se/api/v4/projects/2353/trigger/pipeline"
+        token: ${{ secrets.TOKEN }}
+        project_id: 2353
+        ref: "master"
+        host: "https://gitlab.esss.lu.se"
+        debug: true
