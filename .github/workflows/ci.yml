@@ -17,6 +17,7 @@ jobs:
       
       - name: Build
         run: |
+          cp CI/ESS/.env production/.env
           npm ci
           npm run compile
 
