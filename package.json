@@ -31,7 +31,7 @@
     "express": "^4.17.1",
     "filesize": "^6.1.0",
     "humanname": "^0.2.2",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mongodb": "^3.5.5",
     "mysql": "^2.18.1",
     "pino": "^5.17.0",
